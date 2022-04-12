@@ -89,6 +89,7 @@
             android:text="注册"
             android:textSize="10pt"
             android:layout_margin="80px"
+            android:onClick="reg"
     />
 
 </LinearLayout>
