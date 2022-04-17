@@ -62,38 +62,68 @@ public class LoginActivity extends AppCompatActivity {
         new Thread() {
             @Override
             public void run() {
-                try {
-                    MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-                    //手机发的json内容
-                    JSONObject json = new JSONObject();
-                    json.put("username", username);
-                    json.put("passwd", passwd);
+                MediaType JSON = MediaType.parse("application/json;charset=utf-8");
 
-                    OkHttpClient okHttpClient = new OkHttpClient();
-                    //创建一个RequestBody
-                    RequestBody requestBody = RequestBody.create(String.valueOf(json), JSON);
-                    //创建一个请求对象
-                    Request request = new Request.Builder()
-                            .url("http://www.baidu.com") //后端接口
-                            .post(requestBody)
-                            .build();
+                OkHttpClient okHttpClient = new OkHttpClient();
 
-                    Response response = null;
-                    response = okHttpClient.newCall(request).execute();
-                    if (response.isSuccessful()) {
-                        // 暂时假设服务器的回复是一个json，有个result值表示密码正确or错误
-                        json = new JSONObject(response.body().string());
-                        if(json.getBoolean("result")) {
-                            Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT);
-                        } else {
-                            Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT);
-                        }
+                FormBody.Builder formBuilder = new FormBody.Builder();
+                formBuilder.add("name", username);
+                formBuilder.add("password", passwd);
+
+                Request request = new Request.Builder().url("http://127.0.0.1:5000/login_verify") //后续替换为服务器接口
+                        .post(formBuilder.build())
+                        .build();
+
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(LoginActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        final String res = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (res.equals("Login success!")) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else if (res.equals("Unknown name!")) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+                            }
+                        });
+                    }
+                });
             }
         }.start();
     }
