@@ -62,8 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         new Thread() {
             @Override
             public void run() {
-                MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-
                 OkHttpClient okHttpClient = new OkHttpClient();
 
                 FormBody.Builder formBuilder = new FormBody.Builder();
