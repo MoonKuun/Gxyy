@@ -116,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
                         return;
                     }
                     isPasswdCheck = true;
-                    if(password.getText().toString().trim().length() == confirmPassword.getText().toString().trim().length()) {
+                    if(confirmPassword.getText().toString().trim().length() != 0 && password.getText().toString().trim().equals(confirmPassword.getText().toString().trim())) {
                         isPasswdConfirm = true;
                     } else {
                         isPasswdConfirm = false;
@@ -129,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean focus) {
                 if(!focus) {
-                    if(password.getText().toString().trim().length() == confirmPassword.getText().toString().trim().length()) {
+                    if(password.getText().toString().trim().equals(confirmPassword.getText().toString().trim())) {
                         isPasswdConfirm = true;
                     } else {
                         isPasswdConfirm = false;
@@ -143,6 +143,12 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(password.getText().toString().trim().equals(confirmPassword.getText().toString().trim())) {
+                    isPasswdConfirm = true;
+                } else {
+                    isPasswdConfirm = false;
+                    Toast.makeText(RegisterActivity.this, "两次密码不同", Toast.LENGTH_SHORT).show();
+                }
                 if(!isUserExist && isPasswdCheck && isPasswdConfirm) {
                     new Thread() {
                         @Override
