@@ -5,26 +5,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".LoginActivity"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#98D0B9">
+    <ImageView
+            android:id="@+id/LogoImage"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/logo"/>
+    <TextView
+
+            android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:text="高校越野 注册"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:textSize="30dp"
+
+
+    />
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+    >
+
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="30"
                 android:text="账号"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:textSize="10pt"
         />
-
         <EditText
                 android:id="@+id/account_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="70"
                 android:hint="手机号/邮箱/用户名"
+                android:background="@drawable/translucent_edit"
+
                 android:maxLines="1"
                 android:inputType="text"
         />
@@ -34,11 +62,16 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="59dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp">
         <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
                 android:layout_weight="30"
+                android:textColor="@color/black"
                 android:text="密码"
                 android:gravity="center"
                 android:textSize="10pt"
@@ -47,12 +80,14 @@
         <EditText
                 android:id="@+id/password_box"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:background="@drawable/translucent_edit"
+
+                android:layout_height="46dp"
                 android:layout_weight="70"
                 android:hint="至少包含大写字母、小写字母、数字、特殊符号中的三种"
                 android:textSize="4pt"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textPassword"
         />
 
     </LinearLayout>
@@ -60,11 +95,17 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp">
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="30"
+                android:textColor="@color/black"
+
                 android:text="确认密码"
                 android:gravity="center"
                 android:textSize="10pt"
@@ -73,11 +114,13 @@
         <EditText
                 android:id="@+id/password_check_box"
                 android:layout_width="0dp"
+                android:background="@drawable/translucent_edit"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="70"
                 android:hint="请再次输入密码"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textPassword"
         />
 
     </LinearLayout>
@@ -86,8 +129,12 @@
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="注册"
+
+            android:background="@drawable/translucent_button"
+            android:text="注    册"
             android:textSize="10pt"
+            android:textColor="@color/white"
+
             android:layout_margin="80px"
     />
 
